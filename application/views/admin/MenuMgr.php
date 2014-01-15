@@ -64,10 +64,10 @@
 										echo '<td>'.$menuValue.'</td>';
 										echo '<td>
 											<div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
-											    <button class="btn btn-xs btn-info">
+											    <button class="btn btn-xs btn-info" >
 											        <i class="icon-edit bigger-120"></i>
 											    </button>
-											    <button class="btn btn-xs btn-danger" onclick="return confirm(\'确定要删除?\')">
+											    <button class="btn btn-xs btn-danger" onclick="DelMenu('."'". $menuValue."'".','.$menuKey.' )">
 											        <i class="icon-trash bigger-120"></i>
 											    </button>
 											</div>
@@ -77,20 +77,22 @@
 										
 										foreach ($SubMenuArray[$menuKey] as $SubMenuValue)
 										{
-											
-											echo '<tr>';
-											echo '<td>&nbsp&nbsp&nbsp&nbsp'.$SubMenuValue.'</td>';
-											echo '<td>
+											foreach ($SubMenuValue as $id=>$value)
+											{
+												echo '<tr>';
+												echo '<td>&nbsp&nbsp&nbsp&nbsp'.$value.'</td>';
+												echo '<td>
 												<div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
 												    <button class="btn btn-xs btn-info">
 												        <i class="icon-edit bigger-120"></i>
 												    </button>
-												    <button class="btn btn-xs btn-danger" onclick="return confirm(\'确定要删除?\')">
+												    <button class="btn btn-xs btn-danger" onclick="DelMenu('."'". $value."'".','.$id.')">
 												        <i class="icon-trash bigger-120"></i>
 												    </button>
 												</div>
 											</td>';
-											echo '</tr>';
+												echo '</tr>';
+											}
 										}
 									}
 								?>
@@ -109,5 +111,6 @@
 	</div><!-- /.main-container-inner -->
 </div><!-- /.main-container -->
 
-
+<script src="admin/js/menumgr.js"></script>
+		
 <?php include 'footer.php';?>

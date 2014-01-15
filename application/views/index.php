@@ -40,7 +40,10 @@
 								echo '<ul>';
 								foreach ($SubMenuArray[$menuKey] as $SubMenuValue)
 								{
-									echo '<li><a href="#"><span>'.$SubMenuValue.'</span></a></li>';
+									foreach ($SubMenuValue as $value)
+									{
+										echo '<li><a href="#"><span>'.$value.'</span></a></li>';
+									}									
 								}
 								echo '</ul>';
 							}

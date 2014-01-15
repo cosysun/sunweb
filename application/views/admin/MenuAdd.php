@@ -46,13 +46,23 @@
 				
 				<!-- PAGE CONTENT BEGINS -->
 				<div class="menuadd">
-					<form>
+					<?php 
+						echo validation_errors(); 
+						echo form_open('admin/menuedit');
+					?>
 						<fieldset>
 						<label>标题</label>
 						<input type="text" class="medium-input" id="menutitle" name="menutitle" value=""></input>
 	
 						<label>导航</label>
-						<select name="parentid" class="small-input"></select>
+						<select name="parentid" id="parentid" class="small-input" >
+							<option value="0">作为一级导航</option>
+							<?php 
+								foreach ($menu as $key=>$value){
+									echo '<option value='.$key.'>┠'.$value.'</option>';
+								}
+							?>
+						</select>
 						
 						<label>转链接</label>
 						<input type="text" class="medium-input" id="menulink" name="menulink" value=""></input>
@@ -62,7 +72,7 @@
 						
 						<p>
 							<br/>
-							<input type="submit" class="btn btn-info" name="submit" value="确定"></input>
+							<input type="button" class="btn btn-info" name="Add" value="确定" onclick="EditMenu()"></input>
 						</p>
 						</fieldset>
 					</form>							
@@ -75,5 +85,6 @@
 	</div><!-- /.main-container-inner -->
 </div><!-- /.main-container -->
 
+<script src="admin/js/menumgr.js"></script>
 
 <?php include 'footer.php';?>

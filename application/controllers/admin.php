@@ -4,6 +4,10 @@ class admin extends CI_Controller{
 	public function __construct()
 	{
 		parent::__construct();
+
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+		
 		$this->load->model("MenuDB");
 	}
 	
@@ -33,7 +37,32 @@ class admin extends CI_Controller{
 	
 	public function menuadd()
 	{
-		$this->load->view("admin/MenuAdd.php");
+		$MenuArray = $this->MenuDB->GetMenuInfo();
+		
+		$data['menu'] = $MenuArray[0];
+		
+		$this->load->view("admin/MenuAdd.php", $data);
+	}
+	
+	public function menuedit()
+	{
+		$menuArray = array();
+		$menuArray['title']= $_POST['title'];
+		$menuArray['rootid']= $_POST['rootid'];
+		$menuArray['linkurl']= $_POST['link'];
+		$menuArray['orders']= $_POST['sort'];
+		
+		$this->MenuDB->EditMenu($menuArray);
+		
+		echo TRUE;
+	}
+	
+	public function menudel()
+	{
+		$title = $_POST['title'];
+		$id = $_POST['id'];
+		
+		$this->MenuDB->DelMenu($id);
 	}
 	
 	public function articlemgr()

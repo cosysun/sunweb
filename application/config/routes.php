@@ -44,6 +44,8 @@ $route['admin'] = "admin";
 $route['productcfg/(:any)'] = "admin/productcfg";
 $route['menumgr/(:any)'] = "admin/menumgr/$1";
 $route['menuadd'] = "admin/menuadd";
+$route['menudel'] = "admin/menudel";
+$route['menuedit'] = "admin/menuedit";
 $route['articlemgr'] = "admin/articlemgr";
 
 

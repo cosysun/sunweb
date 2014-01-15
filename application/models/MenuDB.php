@@ -27,12 +27,27 @@ class MenuDB extends CI_Model
 			{
 				if ($MenuRow->id == $SubMenuRow->rootid) 
 				{
-					array_push($SubMenuResult[$MenuRow->id], $SubMenuRow->title);
+					array_push($SubMenuResult[$MenuRow->id], array($SubMenuRow->id=>$SubMenuRow->title));
 				}
 			}
 		}
 		
 		return array($MenuResult, $SubMenuResult);
+	}
+	
+	public function DelMenu($id)
+	{
+		$this->db->where('id', $id);
+		$this->db->delete('zcn_menus');
+	}
+	
+	public function EditMenu($Menu){
+		
+		$Menu['level'] = 0;
+		$Menu['parentid'] = $Menu['rootid'];
+		$Menu['target'] = '';
+		
+		$this->db->insert('zcn_menus', $Menu);
 	}
 
 }

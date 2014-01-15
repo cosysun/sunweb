@@ -1,0 +1,180 @@
+body { margin:0 auto; font-size:12px; font-family:Verdana; line-height:1.5;}
+
+ul,dl,dd,h1,h2,h3,h4,h5,h6,form,p { padding:0; margin:0;}
+
+ul { list-style:none;}
+
+img { border:0px;}
+
+a { color:#000; text-decoration:none;}
+
+a:hover { color:#f00; text-decoration:none;}
+
+#header {
+	width:980px;
+	margin-bottom:8px;
+}
+
+.container {width:980px; margin:0 auto;}
+#header .lang { text-align:center; margin-top:10px;}
+
+
+/*menu*/
+#menu {background:url(../img/nav_bg.gif) 0 0 repeat-x; height:36px;  margin-top:30px;}
+
+.menu_main { overflow:hidden; height:36px;}
+
+.menu_main ul li {
+	float:left;
+	margin:5px 5px 0 5px;
+	font:14px;
+	font-weight:bold;
+}
+
+.menu_main ul li a {
+	display:block;
+	height:26px;
+	padding-left:20px;
+	text-align:center;
+}
+
+.menu_main ul li a span{ display:block; height:26px; padding-right:20px;}
+
+.menu_main ul li a:hover {
+	background:url(../img/nav_bg.gif) 0 -163px no-repeat;
+}
+
+.menu_main ul li a:hover span{ background:url(../img/nav_bg.gif) right -163px no-repeat;}
+
+.menu_main ul li a#menu_current{
+	background:url(../img/nav_bg.gif) 0 -163px no-repeat; height:31px; color:#F00;}
+	
+.menu_main ul li a#menu_current span{
+	background:url(../img/nav_bg.gif) right -163px no-repeat;}
+
+#menu_l {float:left; background:url(../img/nav_bg.gif) 0 -66px no-repeat; margin-right:10px;  height:36px; width:5px;}
+
+#menu_r {float:right; background:url(../img/nav_bg.gif) -5px -66px no-repeat; overflow:hidden; height:36px; width:5px;}
+
+.menu_main ul li ul{ position:absolute; display:none; width:150px; border-bottom:1px solid #666; z-index:1000;}
+.menu_main ul li:hover ul{ display:block; background:url(/sunweb/img/sub_menu.png) repeat;}
+
+.menu_main ul li ul li { color:#000; }
+
+.menu_main ul li ul li a span{ display:block; color:#000; text-align:center; width:100px;}
+
+.menu_main ul li ul li a:hover span{ color:#C33; }
+
+
+#main{ 
+	width:980px;
+	overflow:auto; zoom:1; 
+}
+
+#main_slider {
+	width:980px;
+	margin-bottom:5px;
+}
+
+#main_left { margin-right:10px; float:left; }
+
+#main_left #main_left_1 { width:230px; height:190px; margin-bottom:10px;}
+#main_left #main_left_2 { width:230px; height:190px;}
+
+#main_left #main_left_1 #left_pd{background:url(/sunweb/img/pd.jpg) 0 0 repeat-x; height:35px; font-size:12px; font-weight:bold; margin-bottom:5px;}
+#main_left #main_left_1 #left_pd span{display:block; padding:7px 0 0 10px; }
+
+#main_center {
+	float:right;
+	width:730px;
+	height:400px;
+	overflow:hidden;
+	margin-bottom:8px;
+}
+
+#main_center #dt { float:left; width:360px; height:200px; background:url(/sunweb/img/inde_bg.jpg) 0 0 repeat-x;}
+#main_center #gc { float:right; width:360px; height:200px; background:url(/sunweb/img/inde_bg.jpg) 0 0 repeat-x;}
+#main_center #pd { width:730px; height:200px; background:url(/sunweb/img/inde_bg.jpg) 0 0 repeat-x; margin-top:210px;}
+
+.more { padding-left:200px;}
+
+#main_center #dt ul li { margin-top:12px; border-bottom:#999 1px dotted;}
+#main_center #dt ul li a { padding-left:50px;}
+
+#main_center #gc ul li { margin-top:12px;}
+#main_center #gc ul li a { padding-left:50px;}
+
+.more_pd { padding-left:570px;}
+
+#main_center #pd #photo { height:157px;}
+
+.rollBox{width:728px;overflow:hidden;padding:12px 0 0px 0px; margin-left:2px;}
+.rollBox .LeftBotton{width:16px; overflow:hidden;float:left;display:inline;margin:25px 0 0 0;cursor:pointer;}
+.rollBox .RightBotton{width:16px; overflow:hidden;float:right;display:inline;margin:25px 0 0 0;cursor:pointer;}
+
+.rollBox .Cont{width:670px;overflow:hidden;float:left;}
+
+.rollBox .ScrCont{width:10000000px;}
+
+.rollBox .Cont .pic{ width:220px; float:left;text-align:center; margin-left:3px;}
+.rollBox .Cont .pic img{background:#fff;border:1px solid #ccc;display:block;margin:0 auto;}
+.rollBox .Cont .pic a:link{color:#626466;text-decoration:none;}
+.rollBox .Cont a:visited{color:#000;text-decoration:none;}
+.rollBox .Cont a:hover img{color:#f00;text-decoration:underline;border:1px solid #000;}
+.rollBox #List1{float:left;}
+
+#footer { 
+	width:980px;
+}
+
+#footer dt{background-color:#999; text-align:center; height:30px; line-height:25px; font-weight:bold;color:#FFF;}
+#footer dt a{color:#FFF;}
+#footer dd{text-align:center; padding-top:10px;}
+
+.suckerdiv ul{
+margin: 0;
+padding: 0;
+list-style-type: none;
+width: 230px;
+border-bottom: 1px solid #ccc;
+}
+	
+.suckerdiv ul li{
+position: relative;
+}
+.suckerdiv ul li ul{
+left: 230px; 
+position: absolute;
+width: 220px; 
+top: 0;
+display: none;
+}
+
+.suckerdiv ul li a{
+display: block;
+color: black;
+text-decoration: none;
+font:12px 宋体;
+background:url(/sunweb/img/cb.jpg);
+padding: 5px 5px;
+border: 1px solid #ccc;
+border-bottom: 0;
+text-align:center;
+}
+
+
+.suckerdiv ul li a:visited{
+color: black;
+background:url(/sunweb/img/cb_1.jpg);
+}
+
+.suckerdiv ul li a:hover{
+color: black;
+background:url(/sunweb/img/cb_1.jpg);
+}
+
+.suckerdiv .subfolderstyle{
+background:url(/sunweb/img/cb.jpg);
+}
+* html .suckerdiv ul li { float: left; height: 1%; }
+* html .suckerdiv ul li a { height: 1%; }

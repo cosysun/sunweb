@@ -1,0 +1,18 @@
+
+.btn-shortcut {display:block; width:120px; height:120px; margin-right:20px; float:left;}
+
+.btn-shortcut img {margin-top:5px;}
+
+.btn-shortcut span { display:block; margin-top:15px; }
+
+.col-xs-12 {margin-top:10px;}
+
+.table-responsive {border:#cccccc 1px solid; font-size:13px; padding:20px;}
+
+.table-responsive .table-cs{border-style:none;}
+
+form label {display:block; margin:20px 0px 5px 0px;}
+
+form .medium-input{width:50% !important;}
+
+form .small-input{width:25% !important;}

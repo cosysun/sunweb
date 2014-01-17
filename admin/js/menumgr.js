@@ -20,7 +20,7 @@ function DelMenu(title, id)
 	}
 }
 
-function EditMenu()
+function EditMenu(bFlag, id)
 {
 	var title = $('#menutitle').val();
 	var rootid = $('#parentid').val();
@@ -30,17 +30,37 @@ function EditMenu()
 	$.ajax({
 		type:"POST",
 		url:"/sunweb/index.php/admin/menuedit",
-		data:{'title':title, 'rootid':rootid, 'link':link, 'sort':sort},
+		data:{'id':id, 'title':title, 'rootid':rootid, 'link':link, 'sort':sort, 'flag':bFlag},
 		dataType:"text",
 		cache:false,
 		success:
 			function(data){
 			if(data)
 			{
-				alert("添加成功！");
+				var strMsg = ""
+				if(bFlag)
+				{
+					strMsg = "更新成功"
+					
+					setTimeout(function(){location.href = "/sunweb/index.php/admin/menumgr";}, 1000);
+				}
+				else
+				{
+					strMsg = "添加成功"
+				}
+				alert(strMsg);
 			}
 			else{
-				alert("添加失败！");
+				var strMsg = ""
+				if(bFlag)
+				{
+					strMsg = "更新失败"
+				}
+				else
+				{
+					strMsg = "添加失败"
+				}
+				alert(strMsg);
 			}
 		}
 	});

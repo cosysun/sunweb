@@ -58,13 +58,13 @@
 									
 									<?php 
 									$MenuArray = $MenuData[0];
-									$SubMenuArray = $MenuData[1];
+									$SubMenuArray = $MenuData[1];							
 									foreach ($MenuArray as $menuKey=>$menuValue){
 										echo '<tr>';
 										echo '<td>'.$menuValue.'</td>';
 										echo '<td>
 											<div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
-											    <button class="btn btn-xs btn-info" >
+											    <button class="btn btn-xs btn-info" onclick="location.href='."'/sunweb/index.php/admin/menuupdate/".$menuKey."'".'">
 											        <i class="icon-edit bigger-120"></i>
 											    </button>
 											    <button class="btn btn-xs btn-danger" onclick="DelMenu('."'". $menuValue."'".','.$menuKey.' )">
@@ -83,7 +83,7 @@
 												echo '<td>&nbsp&nbsp&nbsp&nbsp'.$value.'</td>';
 												echo '<td>
 												<div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
-												    <button class="btn btn-xs btn-info">
+												    <button class="btn btn-xs btn-info" onclick="location.href='."'/sunweb/index.php/admin/menuupdate/".$id."'".'">
 												        <i class="icon-edit bigger-120"></i>
 												    </button>
 												    <button class="btn btn-xs btn-danger" onclick="DelMenu('."'". $value."'".','.$id.')">

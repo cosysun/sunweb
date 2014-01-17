@@ -49,30 +49,61 @@
 					<?php 
 						echo validation_errors(); 
 						echo form_open('admin/menuedit');
+						
+						
+						$bFlag = 0;
+						if (count($info)) {
+							$menuinfo = $info;
+							$bFlag = 1;
+						}
+						else {
+							$menuinfo['id'] = 0;
+						}
+						
+						
 					?>
 						<fieldset>
 						<label>标题</label>
-						<input type="text" class="medium-input" id="menutitle" name="menutitle" value=""></input>
+						<input type="text" class="medium-input" id="menutitle" name="menutitle" value="<?php if($bFlag == 1) echo $menuinfo['title']; ?>"></input>
 	
 						<label>导航</label>
 						<select name="parentid" id="parentid" class="small-input" >
-							<option value="0">作为一级导航</option>
+							
+							<?php 	
+								$str = '<option value="0"';
+								if($bFlag == 1)
+								{
+									if ($menuinfo['rootid'] == 0) {
+										$str = $str. 'selected="selected"';
+									}
+								}
+								echo $str.'>作为一级导航</option>';
+							?>
+							
 							<?php 
 								foreach ($menu as $key=>$value){
+									if($bFlag == 1)
+									{	
+										if ($key == $menuinfo['rootid']) {
+											echo '<option value='.$key.' selected="selected">┠'.$value.'</option>';
+											continue;
+										}
+										
+									}
 									echo '<option value='.$key.'>┠'.$value.'</option>';
 								}
 							?>
 						</select>
 						
 						<label>转链接</label>
-						<input type="text" class="medium-input" id="menulink" name="menulink" value=""></input>
+						<input type="text" class="medium-input" id="menulink" name="menulink" value="<?php if($bFlag == 1) echo $menuinfo['link']; ?>"></input>
 						
 						<label>排序</label>
-						<input type="text" class="medium-input" id="menusort" name="menusort" value="0"></input>
+						<input type="text" class="medium-input" id="menusort" name="menusort" value="<?php if($bFlag == 1) echo $menuinfo['orders']; ?>"></input>
 						
 						<p>
 							<br/>
-							<input type="button" class="btn btn-info" name="Add" value="确定" onclick="EditMenu()"></input>
+							<input type="button" class="btn btn-info" name="Add" value="确定" onclick="EditMenu(<?php echo $bFlag; ?>,<?php echo $menuinfo['id'];?>)"></input>
 						</p>
 						</fieldset>
 					</form>							

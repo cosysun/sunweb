@@ -40,6 +40,7 @@ class admin extends CI_Controller{
 		$MenuArray = $this->MenuDB->GetMenuInfo();
 		
 		$data['menu'] = $MenuArray[0];
+		$data['info'] = array();
 		
 		$this->load->view("admin/MenuAdd.php", $data);
 	}
@@ -51,10 +52,23 @@ class admin extends CI_Controller{
 		$menuArray['rootid']= $_POST['rootid'];
 		$menuArray['linkurl']= $_POST['link'];
 		$menuArray['orders']= $_POST['sort'];
-		
-		$this->MenuDB->EditMenu($menuArray);
+		$flag = $_POST['flag'];
+		$menuArray['id'] = $_POST['id'];
+		$this->MenuDB->EditMenu($menuArray, $flag);
 		
 		echo TRUE;
+	}
+	
+	public function menuupdate($id)
+	{
+		$MenuInfo = $this->MenuDB->QueryMenuInfo($id);
+		
+		$MenuArray = $this->MenuDB->GetMenuInfo();
+		
+		$data['menu'] = $MenuArray[0];
+		$data['info'] = $MenuInfo;
+		
+		$this->load->view("admin/MenuAdd.php", $data);
 	}
 	
 	public function menudel()

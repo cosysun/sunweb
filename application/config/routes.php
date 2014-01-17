@@ -47,6 +47,7 @@ $route['menuadd'] = "admin/menuadd";
 $route['menudel'] = "admin/menudel";
 $route['menuedit'] = "admin/menuedit";
 $route['articlemgr'] = "admin/articlemgr";
+$route['menuupdate/(:any)']="admin/menuupdate/$1";
 
 
 $route['404_override'] = '';

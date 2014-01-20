@@ -49,11 +49,7 @@
 
 		<script src="admin/js/ace-elements.min.js"></script>
 		<script src="admin/js/ace.min.js"></script>
-		<<script src="admin/js/navlist.js">
-<!--
-
-//-->
-</script>
+		<script src="admin/js/navlist.js"></script>
 
 	<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>

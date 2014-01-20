@@ -9,6 +9,7 @@ class admin extends CI_Controller{
 		$this->load->library('form_validation');
 		
 		$this->load->model("MenuDB");
+		$this->load->model("ArticleDB");
 	}
 	
 	public function index($c="")
@@ -21,14 +22,7 @@ class admin extends CI_Controller{
 		$this->load->view("admin/index.php", $data);
 	}
 	
-	public function productcfg()
-	{
-		$MenuArray = $this->MenuDB->GetMenuInfo();
-		
-		$data['menu'] = $MenuArray;
-		$this->load->view("admin/productcfg.php", $data);
-	}
-	
+	// 导航管理
 	public function menumgr($c="", $a="")
 	{
 		$data['MenuData']=$this->MenuDB->GetMenuInfo();
@@ -79,9 +73,17 @@ class admin extends CI_Controller{
 		$this->MenuDB->DelMenu($id);
 	}
 	
-	public function articlemgr()
+	// 文章管理
+	public function articleClassmgr()
 	{
-		$this->load->view("admin/articlemgr.php");
+		$data['ArticleData']=$this->ArticleDB->GetArticleClassInfo();
+		$this->load->view("admin/articleclassmgr.php", $data);
+	}
+	
+	public function ArticleClassdel()
+	{
+		$id = $_POST['id'];
+		$this->ArticleDB->DelArticleClass($id);
 	}
 }
 ?>

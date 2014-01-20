@@ -51,7 +51,7 @@
 			</a>
 			<ul class="submenu">
 				<li>
-					<a href="/sunweb/index.php/admin/articlemgr/">
+					<a href="/sunweb/index.php/admin/articleclassmgr/">
 						<i class="icon-double-angle-right"></i>
 					文章分类列表</a>
 				</li>
@@ -87,14 +87,4 @@
 		try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
 	</script>
 	
-	<script type="text/javascript">
-	<?php 
-			//控制menu
-			echo '$("#'.$c.'").addClass("active open");';
-			
-			if (!empty($a)) {
-				echo '$("#'.$c.'_'.$a.'").addClass("active");';
-			}
-	?>
-	</script>
 </div>

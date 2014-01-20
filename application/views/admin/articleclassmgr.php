@@ -24,7 +24,7 @@
 						<i class="icon-home home-icon"></i>
 						<a href="/sunweb/index.php/admin">首页</a>
 					</li>
-					<li class="active">文章列表</li>
+					<li class="active">文章分类列表</li>
 				</ul><!-- .breadcrumb -->
 
 				<div class="nav-search" id="nav-search">
@@ -40,7 +40,7 @@
 			<div class="page-content">
 				<div class="page-header">
 					<h1>
-						文章列表
+						文章分类列表
 					</h1>
 				</div><!-- /.page-header -->
 				
@@ -55,61 +55,54 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>企业管理</td>
-										<td>
-											<div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
-											    
-											    <button class="btn btn-xs btn-primary">
-											        <i class="icon-book bigger-120"></i>
-											    </button>	
-											    											    
-											    <button class="btn btn-xs btn-info">
-											        <i class="icon-edit bigger-120"></i>
-											    </button>										    
-											    
-											    <button class="btn btn-xs btn-danger" onclick="return confirm('确定要删除?')">
-											        <i class="icon-trash bigger-120"></i>
-											    </button>
-											</div>									
-										</td>
-									</tr>
-									<tr>
-										<td>&nbsp&nbsp&nbsp&nbsp关于我们</td>
-										<td>
-											<div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
-											    <button class="btn btn-xs btn-primary">
-											        <i class="icon-book bigger-120"></i>
-											    </button>	
-											    											    
-											    <button class="btn btn-xs btn-info">
-											        <i class="icon-edit bigger-120"></i>
-											    </button>
-											    <button class="btn btn-xs btn-danger">
-											        <i class="icon-trash bigger-120"></i>
-											    </button>
-											    											    
-											</div>									
-										</td>
-									</tr>
 									
-									<tr>
-										<td>产品中心</td>
-										<td>
+									<?php 
+									$ArticleArray = $ArticleData[0];
+									$SubArticleArray = $ArticleData[1];							
+									foreach ($ArticleArray as $ArticleKey=>$ArticleValue){
+										echo '<tr>';
+										echo '<td>'.$ArticleValue.'</td>';
+										echo '<td>
 											<div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
-											    <button class="btn btn-xs btn-primary">
-											        <i class="icon-book bigger-120"></i>
-											    </button>	
-											    											
-											    <button class="btn btn-xs btn-info">
+												<button class="btn btn-xs btn-info" onclick="location.href='."'/sunweb/index.php/admin/articleclassadd/".$ArticleKey."'".'">
+													<i class="icon-plus bigger-120"></i>
+												</button>
+											    <button class="btn btn-xs btn-info" onclick="location.href='."'/sunweb/index.php/admin/articleclassupdate/".$ArticleKey."'".'">
 											        <i class="icon-edit bigger-120"></i>
 											    </button>
-											    <button class="btn btn-xs btn-danger">
+											    <button class="btn btn-xs btn-danger" onclick="DelArticleClass('.$ArticleKey.' )">
 											        <i class="icon-trash bigger-120"></i>
 											    </button>
-											</div>									
-										</td>
-									</tr>																		
+											</div>
+										</td>';
+										echo '</tr>';
+
+										
+										foreach ($SubArticleArray[$ArticleKey] as $SubArticleValue)
+										{
+											foreach ($SubArticleValue as $id=>$value)
+											{
+												echo '<tr>';
+												echo '<td>&nbsp&nbsp&nbsp&nbsp'.$value.'</td>';
+												echo '<td>
+												<div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+												    <button class="btn btn-xs btn-info" onclick="location.href='."'/sunweb/index.php/admin/articleclassadd/".$id."'".'">
+												        <i class="icon-plus bigger-120"></i>
+												    </button>
+													<button class="btn btn-xs btn-info" onclick="location.href='."'/sunweb/index.php/admin/articleclassupdate/".$id."'".'">
+												        <i class="icon-edit bigger-120"></i>
+												    </button>
+												    <button class="btn btn-xs btn-danger" onclick="DelArticleClass('.$id.')">
+												        <i class="icon-trash bigger-120"></i>
+												    </button>
+												</div>
+											</td>';
+												echo '</tr>';
+											}
+										}
+									}
+								?>
+																	
 								</tbody>
 							</table>
 					</div><!-- /.col -->
@@ -124,5 +117,6 @@
 	</div><!-- /.main-container-inner -->
 </div><!-- /.main-container -->
 
-
+<script src="admin/js/articlemgr.js"></script>
+		
 <?php include 'footer.php';?>

@@ -55,6 +55,12 @@
 						<i class="icon-double-angle-right"></i>
 					文章分类列表</a>
 				</li>
+				
+				<li>
+					<a href="/sunweb/index.php/admin/articleclassadd/">
+						<i class="icon-double-angle-right"></i>
+					文章分类添加</a>
+				</li>
 				</ul>
 		</li>
 		

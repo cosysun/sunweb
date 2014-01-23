@@ -38,76 +38,101 @@
 			</div>
 
 			<div class="page-content">
-				<div class="page-header">
-					<h1>
-						文章分类添加
-					</h1>
-				</div><!-- /.page-header -->
 				
 				<!-- PAGE CONTENT BEGINS -->
-				<div class="articleclassadd">
-					<?php 
-						echo validation_errors(); 
-						echo form_open('admin/articleclassedit');
-						
-						
-						$bFlag = 0;
-						if (count($info)) {
-							$articleclassinfo = $info;
-							$bFlag = 1;
-						}
-						else {
-							$articleclassinfo['id'] = 0;
-						}
-						
-						
-					?>
-						<fieldset>
-						<label>标题</label>
-						<input type="text" class="medium-input" id="menutitle" name="menutitle" value="<?php if($bFlag == 1) echo $menuinfo['title']; ?>"></input>
-	
-						<label>导航</label>
-						<select name="parentid" id="parentid" class="small-input" >
-							
-							<?php 	
-								$str = '<option value="0"';
-								if($bFlag == 1)
-								{
-									if ($menuinfo['rootid'] == 0) {
-										$str = $str. 'selected="selected"';
-									}
-								}
-								echo $str.'>作为一级导航</option>';
-							?>
-							
-							<?php 
-								foreach ($menu as $key=>$value){
-									if($bFlag == 1)
-									{	
-										if ($key == $menuinfo['rootid']) {
-											echo '<option value='.$key.' selected="selected">┠'.$value.'</option>';
-											continue;
+				<div class="widget-box transparent" id="recent-box">
+					<div class="widget-header"> 
+						<h4>文章分类添加</h4>
+						<div class="widget-toolbar no-border">
+							<ul class="nav nav-tabs" id="recent-tab">
+							<li class="active"><a data-toggle="tab" href="#tab1">基本信息</a></li>
+							<li><a data-toggle="tab" href="#tab2">扩展信息</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="widget-body">
+						<div class="widget-main">
+							<div class="tab-content">
+								<div id="tab1" class="tab-pane active">
+									<div class="articleclassadd">
+									<?php 
+										echo validation_errors(); 
+										echo form_open('admin/articleclassedit');
+										
+										
+										$bFlag = 0;
+										if (count($info)) {
+											$articleclassinfo = $info;
+											$bFlag = 1;
+										}
+										else {
+											$articleclassinfo['id'] = 0;
 										}
 										
-									}
-									echo '<option value='.$key.'>┠'.$value.'</option>';
-								}
-							?>
-						</select>
-						
-						<label>转链接</label>
-						<input type="text" class="medium-input" id="menulink" name="menulink" value="<?php if($bFlag == 1) echo $menuinfo['link']; ?>"></input>
-						
-						<label>排序</label>
-						<input type="text" class="medium-input" id="menusort" name="menusort" value="<?php if($bFlag == 1) echo $menuinfo['orders']; ?>"></input>
-						
-						<p>
-							<br/>
-							<input type="button" class="btn btn-info" name="Add" value="确定" onclick="EditMenu(<?php echo $bFlag; ?>,<?php echo $menuinfo['id'];?>)"></input>
-						</p>
-						</fieldset>
-					</form>							
-				</div><!-- /.row -->
+										
+									?>
+										<fieldset>
+										<label>标题</label>
+										<input type="text" class="medium-input" id="articleclasstitle" name="articleclasstitle" value="<?php if($bFlag == 1) echo $articleclassinfo['title']; ?>"></input>
+					
+										<label>导航</label>
+										<select name="parentid" id="parentid" class="small-input" >
+											
+											<?php 	
+												$str = '<option value="0"';
+												if($bFlag == 1)
+												{
+													if ($articleclassinfo['rootid'] == 0) {
+														$str = $str. 'selected="selected"';
+													}
+												}
+												echo $str.'>作为一级分类</option>';
+											?>
+											
+											<?php 
+												foreach ($articleclass as $key=>$value){
+													if($bFlag == 1)
+													{	
+														if ($key == $articleclassinfo['rootid']) {
+															echo '<option value='.$key.' selected="selected">┠'.$value.'</option>';
+															continue;
+														}
+														
+													}
+													echo '<option value='.$key.'>┠'.$value.'</option>';
+												}
+											?>
+										</select>
+										
+										<label>缩略图</label>
+										<input class="text-input medium-input" type="text" id="thumb" name="thumb" value="" /> 
+										<input class="medium-input" type="file" id="thumb_file" name="thumb_file" onchange="return ajaxFileUpload('thumb_file','thumb','thumb_loading');" />
+										<span id="thumb_loading"></span>
+										
+										<label>转链接</label>
+										<input type="text" class="medium-input" id="articleclasslink" name="articleclasslink" value="<?php if($bFlag == 1) echo $articleclassinfo['link']; ?>"></input>
+										
+										<label>排序</label>
+										<input type="text" class="medium-input" id="articleclasssort" name="articleclasssort" value="<?php if($bFlag == 1) echo $articleclassinfo['orders']; ?>"></input>
+										
+										<p>
+											<br/>
+											<input type="button" class="btn btn-info" name="Add" value="确定" onclick="Editarticleclass(<?php echo $bFlag; ?>,<?php echo $articleclassinfo['id'];?>)"></input>
+										</p>
+										</fieldset>
+									</form>							
+								</div><!-- /.row -->
+								</div>
+								
+								<div id="tab2" class="tab-pane active">
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+
+				
 				<!-- PAGE CONTENT ENDS -->
 				
 			</div><!-- /.page-content -->
@@ -116,6 +141,8 @@
 	</div><!-- /.main-container-inner -->
 </div><!-- /.main-container -->
 
-<script src="admin/js/menumgr.js"></script>
+<script src="admin/js/articleclassmgr.js"></script>
+<script src="admin/plugin/upload/ajaxfileupload.js"></script>
+<script src="admin/js/admin.jquery.configuration.js"></script>
 
 <?php include 'footer.php';?>

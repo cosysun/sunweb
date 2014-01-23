@@ -48,6 +48,8 @@ $route['menudel'] = "admin/menudel";
 $route['menuedit'] = "admin/menuedit";
 $route['articleclassmgr'] = "admin/articleclassmgr";
 $route['menuupdate/(:any)']="admin/menuupdate/$1";
+$route['articleclassadd'] = "admin/articleclassadd";
+$route['upload'] = "admin/upload";
 
 
 $route['404_override'] = '';

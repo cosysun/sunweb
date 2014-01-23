@@ -85,5 +85,21 @@ class admin extends CI_Controller{
 		$id = $_POST['id'];
 		$this->ArticleDB->DelArticleClass($id);
 	}
+	
+	public function articleclassadd()
+	{
+		$ArticleClassArray = $this->ArticleDB->GetArticleClassInfo();
+	
+		$data['articleclass'] = $ArticleClassArray[0];
+		$data['info'] = array();
+	
+		$this->load->view("admin/articleclassadd.php", $data);
+	}
+	
+	public function upload()
+	{
+		
+		$this->load->view("admin/uploada.php");
+	}
 }
 ?>

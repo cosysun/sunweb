@@ -1,4 +1,5 @@
 <?php
+require 'uploada.php';
 
 class admin extends CI_Controller{
 	public function __construct()
@@ -12,29 +13,31 @@ class admin extends CI_Controller{
 		$this->load->model("ArticleDB");
 	}
 	
-	public function index($c="")
+	public function index()
 	{
 		$MenuArray = $this->MenuDB->GetMenuInfo();
 		
 		$data['menu'] = $MenuArray;
-		$data['c']=$c;
+		$data['menuid']="menu-board";
 		
 		$this->load->view("admin/index.php", $data);
 	}
 	
 	// 导航管理
-	public function menumgr($c="", $a="")
+	public function menumgr($id)
 	{
 		$data['MenuData']=$this->MenuDB->GetMenuInfo();
+		$data['menuid']=$id;
 		$this->load->view("admin/MenuMgr.php", $data);
 	}
 	
-	public function menuadd()
+	public function menuadd($id)
 	{
 		$MenuArray = $this->MenuDB->GetMenuInfo();
 		
 		$data['menu'] = $MenuArray[0];
 		$data['info'] = array();
+		$data['menuid']=$id;
 		
 		$this->load->view("admin/MenuAdd.php", $data);
 	}
@@ -74,9 +77,10 @@ class admin extends CI_Controller{
 	}
 	
 	// 文章管理
-	public function articleClassmgr()
+	public function articleClassmgr($id)
 	{
 		$data['ArticleData']=$this->ArticleDB->GetArticleClassInfo();
+		$data['menuid'] = $id;
 		$this->load->view("admin/articleclassmgr.php", $data);
 	}
 	
@@ -86,20 +90,20 @@ class admin extends CI_Controller{
 		$this->ArticleDB->DelArticleClass($id);
 	}
 	
-	public function articleclassadd()
+	public function articleclassadd($id)
 	{
 		$ArticleClassArray = $this->ArticleDB->GetArticleClassInfo();
 	
 		$data['articleclass'] = $ArticleClassArray[0];
 		$data['info'] = array();
-	
+		$data['menuid'] = $id;
 		$this->load->view("admin/articleclassadd.php", $data);
 	}
 	
 	public function upload()
-	{
-		
-		$this->load->view("admin/uploada.php");
+	{		
+		$upload = new Upload();
+		$upload->uploadfile();
 	}
 }
 ?>

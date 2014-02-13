@@ -118,5 +118,5 @@
 </div><!-- /.main-container -->
 
 <script src="admin/js/articlemgr.js"></script>
-		
+
 <?php include 'footer.php';?>

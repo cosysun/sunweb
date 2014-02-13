@@ -16,3 +16,52 @@ form label {display:block; margin:20px 0px 5px 0px;}
 form .medium-input{width:50% !important;}
 
 form .small-input{width:25% !important;}
+
+#uploadem{height:30px;}
+#thumb {display:block; width:25% !important; float:left;}
+#thumb_loading{display:block; margin-left:5px; padding-top:5px;float:left;}
+
+
+a {text-decoration:none;}
+
+.btn_addPic{
+	display:block;
+	float:left;
+	position: relative;
+	width:6% !important;
+	height: 30px; 
+	text-align: center;
+	overflow: hidden;  
+	border: 1px solid #EBEBEB;  
+	background: none repeat scroll 0 0 #F3F3F3;  
+	color: #999999;  
+	cursor: pointer;
+	margin-left:10px;
+}
+
+.btn_addPic span {display:block; float:left; margin-left:10px;}
+
+.btn_addPic em {
+	background:url(../images/upload.png) 0 0;  
+	display: inline-block;  
+	width: 18px;  
+	height: 18px;  
+	overflow: hidden;  
+	margin: 5px 5px 5px 0;  
+	line-height: 20em;  
+	vertical-align: middle;
+}
+
+.btn_addPic:hover em{background-position:-19px 0;}
+
+#thumb_file {  
+	display: block;  
+	position: absolute;  
+	top: 0;  
+	left: 0;  
+	width: 140px;  
+	height: 39px;  
+	font-size: 100px; /* 增大不同浏览器的可点击区域 */  
+	opacity: 0; /* 实现的关键点 */  
+	filter:alpha(opacity=0);/* 兼容IE */  
+} 

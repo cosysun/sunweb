@@ -1,6 +1,5 @@
 $(document).ready(function(){
 	
-	
 });
 //datetimepicker
 function show_date(v,formattype)
@@ -28,13 +27,11 @@ function ajaxFileUpload(fid,bid,lid)
 	if(!$('#'+ fid).val()){
 		return false;
 	}
-	var loadingc = '<img src="images/loading.gif" >';
+	var loadingc = '<img src="admin/images/loading.gif" />';
 	//return false;
-	$("#"+lid)
-	.ajaxStart(function(){
-		$(this).html(loadingc);
-	})
-	.ajaxComplete(function(){
+	$(document).ajaxStart(function(){
+		$("#"+lid).html(loadingc);
+	}).ajaxComplete(function(){
 		//$(this).html('');
 	});
 	$.ajaxFileUpload

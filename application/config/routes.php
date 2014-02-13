@@ -43,12 +43,12 @@ $route['product'] = "welcome/product";
 $route['admin'] = "admin";
 $route['productcfg/(:any)'] = "admin/productcfg";
 $route['menumgr/(:any)'] = "admin/menumgr/$1";
-$route['menuadd'] = "admin/menuadd";
+$route['menuadd/(:any)'] = "admin/menuadd/$1";
 $route['menudel'] = "admin/menudel";
 $route['menuedit'] = "admin/menuedit";
-$route['articleclassmgr'] = "admin/articleclassmgr";
+$route['articleclassmgr/(:any)'] = "admin/articleclassmgr/$1";
 $route['menuupdate/(:any)']="admin/menuupdate/$1";
-$route['articleclassadd'] = "admin/articleclassadd";
+$route['articleclassadd/(:any)'] = "admin/articleclassadd/$1";
 $route['upload'] = "admin/upload";
 
 

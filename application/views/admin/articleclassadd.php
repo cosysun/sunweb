@@ -103,11 +103,12 @@
 												}
 											?>
 										</select>
-										
 										<label>缩略图</label>
-										<input class="text-input medium-input" type="text" id="thumb" name="thumb" value="" /> 
-										<input class="medium-input" type="file" id="thumb_file" name="thumb_file" onchange="return ajaxFileUpload('thumb_file','thumb','thumb_loading');" />
-										<span id="thumb_loading"></span>
+										<div id="uploadem">
+											<input class="text-input medium-input" type="text" id="thumb" name="thumb" value="" /> 
+											<a class="btn_addPic" href="javascript:void(0);"><span><em>+</em>添加图片</span><input class="medium-input" type="file" id="thumb_file" name="thumb_file" onchange="return ajaxFileUpload('thumb_file','thumb','thumb_loading');" /></a>
+											<span id="thumb_loading"></span>
+										</div>
 										
 										<label>转链接</label>
 										<input type="text" class="medium-input" id="articleclasslink" name="articleclasslink" value="<?php if($bFlag == 1) echo $articleclassinfo['link']; ?>"></input>
@@ -142,7 +143,5 @@
 </div><!-- /.main-container -->
 
 <script src="admin/js/articleclassmgr.js"></script>
-<script src="admin/plugin/upload/ajaxfileupload.js"></script>
-<script src="admin/js/admin.jquery.configuration.js"></script>
 
 <?php include 'footer.php';?>

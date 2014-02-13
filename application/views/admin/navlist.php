@@ -36,8 +36,8 @@
 	</div><!-- #sidebar-shortcuts -->
 
 	<ul class="nav nav-list">
-		<li id="board">
-			<a href="/sunweb/index.php/admin/?c=board">
+		<li>
+			<a id="menu-board" href="/sunweb/index.php/admin">
 				<i class="icon-dashboard"></i>
 				<span class="menu-text"> 控制台 </span>
 			</a>
@@ -51,13 +51,13 @@
 			</a>
 			<ul class="submenu">
 				<li>
-					<a href="/sunweb/index.php/admin/articleclassmgr/">
+					<a id="menu-articleclasslist" href="/sunweb/index.php/admin/articleclassmgr/menu-articleclasslist">
 						<i class="icon-double-angle-right"></i>
 					文章分类列表</a>
 				</li>
 				
 				<li>
-					<a href="/sunweb/index.php/admin/articleclassadd/">
+					<a id="menu-articleclassadd" href="/sunweb/index.php/admin/articleclassadd/menu-articleclassadd">
 						<i class="icon-double-angle-right"></i>
 					文章分类添加</a>
 				</li>
@@ -71,19 +71,29 @@
 				<b class="arrow icon-angle-down"></b>
 			</a>
 			<ul class="submenu">
-				<li id="menubar_list">
-					<a href="/sunweb/index.php/admin/menumgr/?c=menubar&a=list">
+				<li>
+					<a id="menu-barlist" href="/sunweb/index.php/admin/menumgr/menu-barlist">
 						<i class="icon-double-angle-right"></i>
 					导航列表</a>
 				</li>
-				<li id="menubar_add">
-					<a href="/sunweb/index.php/admin/menuadd/">
+				<li >
+					<a id="menu-baradd" href="/sunweb/index.php/admin/menuadd/menu-baradd">
 						<i class="icon-double-angle-right"></i>
 					导航添加</a>
 				</li>
 			</ul>
 		</li>						
 	</ul><!-- /.nav-list -->
+	
+
+	<script type="text/javascript">
+			<?php 
+				echo '$("#'.$menuid.'").parent().addClass("active");';
+				
+				echo '$("#'.$menuid.'").parent().parent().show();';
+			?>
+		</script>
+	
 
 	<div class="sidebar-collapse" id="sidebar-collapse">
 		<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>

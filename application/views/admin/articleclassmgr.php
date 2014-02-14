@@ -117,6 +117,6 @@
 	</div><!-- /.main-container-inner -->
 </div><!-- /.main-container -->
 
-<script src="admin/js/articlemgr.js"></script>
+<script src="admin/js/articleclassmgr.js"></script>
 
 <?php include 'footer.php';?>

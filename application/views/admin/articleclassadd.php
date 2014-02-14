@@ -105,7 +105,7 @@
 										</select>
 										<label>缩略图</label>
 										<div id="uploadem">
-											<input class="text-input medium-input" type="text" id="thumb" name="thumb" value="" /> 
+											<input class="text-input medium-input" type="text" id="thumb" name="thumb" value="<?php if($bFlag == 1) echo $articleclassinfo['thumb']; ?>" /> 
 											<a class="btn_addPic" href="javascript:void(0);"><span><em>+</em>添加图片</span><input class="medium-input" type="file" id="thumb_file" name="thumb_file" onchange="return ajaxFileUpload('thumb_file','thumb','thumb_loading');" /></a>
 											<span id="thumb_loading"></span>
 										</div>

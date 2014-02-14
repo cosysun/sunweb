@@ -36,20 +36,21 @@ class ArticleDB extends CI_Model
 		return array($ArticleResult, $SubArticleResult);
 	}
 	
-	public function QueryMenuInfo($id)
+	public function QueryArticleClassInfo($id)
 	{
-		$strSql = "SELECT * FROM zcn_menus where id=".$id;
-		$MenuInfoRs = $this->db->query($strSql);
+		$strSql = "SELECT * FROM zcn_articles_class where id=".$id;
+		$InfoRs = $this->db->query($strSql);
 		
-		foreach ($MenuInfoRs->result() as $MenuRow){
-			$Menu['title'] = $MenuRow->title;
-			$Menu['link'] = $MenuRow->linkurl;
-			$Menu['rootid'] = $MenuRow->rootid;
-			$Menu['orders'] = $MenuRow->orders;
-			$Menu['id'] = $id;
+		foreach ($InfoRs->result() as $Row){
+			$Info['title'] = $Row->title;
+			$Info['link'] = $Row->linkurl;
+			$Info['rootid'] = $Row->rootid;
+			$Info['orders'] = $Row->orders;
+			$Info['thumb'] = $Row->thumb;
+			$Info['id'] = $id;
 		}
 		
-		return  $Menu;
+		return  $Info;
 	}
 	
 	public function DelArticleClass($id)
@@ -58,18 +59,17 @@ class ArticleDB extends CI_Model
 		$this->db->delete('zcn_articles_class');
 	}
 	
-	public function EditMenu($Menu, $Flag){
+	public function EditArticleClass($ArticleClass, $Flag){
 		
-		$Menu['level'] = 0;
-		$Menu['parentid'] = $Menu['rootid'];
-		$Menu['target'] = '';
+		$ArticleClass['level'] = 0;
+		$ArticleClass['parentid'] = $ArticleClass['rootid'];
 		
 		if ($Flag == 1) {
-			$this->db->where("id", $Menu['id']);
-			$this->db->update('zcn_menus', $Menu);
+			$this->db->where("id", $ArticleClass['id']);
+			$this->db->update('zcn_articles_class', $ArticleClass);
 		}
 		else {
-			$this->db->insert('zcn_menus', $Menu);
+			$this->db->insert('zcn_articles_class', $ArticleClass);
 		}
 	}
 

@@ -100,6 +100,33 @@ class admin extends CI_Controller{
 		$this->load->view("admin/articleclassadd.php", $data);
 	}
 	
+	public function articleclassupdate($id)
+	{
+		$ArticleClassInfo = $this->ArticleDB->QueryArticleClassInfo($id);
+		
+		$ArticleClassArray = $this->ArticleDB->GetArticleClassInfo();
+		
+		$data['articleclass'] = $ArticleClassArray[0];
+		$data['info'] = $ArticleClassInfo;
+		
+		$this->load->view("admin/articleclassadd.php", $data);
+	}
+	
+	public function articleclassedit()
+	{
+		$articleArray = array();
+		$articleArray['title']= $_POST['title'];
+		$articleArray['rootid']= $_POST['rootid'];
+		$articleArray['thumb']= $_POST['img'];
+		$articleArray['linkurl']= $_POST['link'];
+		$articleArray['orders']= $_POST['sort'];
+		$flag = $_POST['flag'];
+		$articleArray['id'] = $_POST['id'];
+		$this->ArticleDB->EditArticleClass($articleArray, $flag);
+	
+		echo TRUE;
+	}
+	
 	public function upload()
 	{		
 		$upload = new Upload();

@@ -42,7 +42,7 @@ function EditMenu(bFlag, id)
 				{
 					strMsg = "更新成功"
 					
-					setTimeout(function(){location.href = "/sunweb/index.php/admin/menumgr";}, 1000);
+					setTimeout(function(){location.href = "/sunweb/index.php/admin/menumgr/menu-barlist";}, 1000);
 				}
 				else
 				{

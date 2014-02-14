@@ -49,6 +49,9 @@ $route['menuedit'] = "admin/menuedit";
 $route['articleclassmgr/(:any)'] = "admin/articleclassmgr/$1";
 $route['menuupdate/(:any)']="admin/menuupdate/$1";
 $route['articleclassadd/(:any)'] = "admin/articleclassadd/$1";
+$route['articleclassedit'] = "admin/articleclassedit";
+$route['articleclassupdate/(:any)']="admin/articleclassupdate/$1";
+$route['articleclassdel'] = "admin/ArticleClassdel";
 $route['upload'] = "admin/upload";
 
 

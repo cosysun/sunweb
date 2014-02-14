@@ -12,6 +12,7 @@ function DelArticleClass(id)
 			data:{'id':id},
 			dataType:"text",
 			cache:false,
+			global:false,
 			success:
 				function(data){
 				location.reload();
@@ -20,19 +21,21 @@ function DelArticleClass(id)
 	}
 }
 
-function EditMenu(bFlag, id)
+function Editarticleclass(bFlag, id)
 {
-	var title = $('#menutitle').val();
+	var title = $('#articleclasstitle').val();
 	var rootid = $('#parentid').val();
-	var link = $('#menulink').val();
-	var sort = $('#menusort').val();	
+	var imgpath = $('#thumb').val();
+	var link = $('#articleclasslink').val();
+	var sort = $('#articleclasssort').val();	
 	
 	$.ajax({
 		type:"POST",
-		url:"/sunweb/index.php/admin/menuedit",
-		data:{'id':id, 'title':title, 'rootid':rootid, 'link':link, 'sort':sort, 'flag':bFlag},
+		url:"/sunweb/index.php/admin/articleclassedit",
+		data:{'id':id, 'title':title, 'rootid':rootid, 'link':link, 'sort':sort, 'img':imgpath, 'flag':bFlag},
 		dataType:"text",
 		cache:false,
+		global:false,
 		success:
 			function(data){
 			if(data)
@@ -42,7 +45,7 @@ function EditMenu(bFlag, id)
 				{
 					strMsg = "更新成功"
 					
-					setTimeout(function(){location.href = "/sunweb/index.php/admin/menumgr";}, 1000);
+					setTimeout(function(){location.href = "/sunweb/index.php/admin/articleclassmgr/menu-articleclasslist";}, 1000);
 				}
 				else
 				{

@@ -96,6 +96,8 @@
 		<script src="admin/js/ace.min.js"></script>
 		<script src="admin/plugin/upload/ajaxfileupload.js"></script>
 		<script src="admin/js/admin.jquery.configuration.js"></script>
+		
+		
 	</head>
 
 	<body>

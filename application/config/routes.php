@@ -53,6 +53,8 @@ $route['articleclassedit'] = "admin/articleclassedit";
 $route['articleclassupdate/(:any)']="admin/articleclassupdate/$1";
 $route['articleclassdel'] = "admin/ArticleClassdel";
 $route['upload'] = "admin/upload";
+$route['articlelist/(:any)'] = "admin/ArticleList/$1";
+$route['articleshow'] = "admin/ArticleShow";
 
 
 $route['404_override'] = '';

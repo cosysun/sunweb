@@ -61,6 +61,19 @@
 						<i class="icon-double-angle-right"></i>
 					文章分类添加</a>
 				</li>
+				
+				<li>
+					<a id="menu-articlelist" href="/sunweb/index.php/admin/articlelist/menu-articlelist">
+						<i class="icon-double-angle-right"></i>
+					文章列表</a>
+				</li>
+				
+				<li>
+					<a id="menu-articleadd" href="/sunweb/index.php/admin/articleadd/menu-articleadd">
+						<i class="icon-double-angle-right"></i>
+					文章添加</a>
+				</li>
+				
 				</ul>
 		</li>
 		
@@ -92,7 +105,7 @@
 				
 				echo '$("#'.$menuid.'").parent().parent().show();';
 			?>
-		</script>
+	</script>
 	
 
 	<div class="sidebar-collapse" id="sidebar-collapse">

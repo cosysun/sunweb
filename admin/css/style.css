@@ -64,4 +64,6 @@ a {text-decoration:none;}
 	font-size: 100px; /* 增大不同浏览器的可点击区域 */  
 	opacity: 0; /* 实现的关键点 */  
 	filter:alpha(opacity=0);/* 兼容IE */  
-} 
+}
+
+

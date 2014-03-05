@@ -76,7 +76,7 @@ class admin extends CI_Controller{
 		$this->MenuDB->DelMenu($id);
 	}
 	
-	// 文章管理
+	// 文章列表管理
 	public function articleClassmgr($id)
 	{
 		$data['ArticleData']=$this->ArticleDB->GetArticleClassInfo();
@@ -127,6 +127,61 @@ class admin extends CI_Controller{
 		echo TRUE;
 	}
 	
+	//////////////////////////////////////////////////////////////////////////
+	//文章管理
+	
+	public function ArticleList($id)
+	{
+		$ArticleData = $this->ArticleDB->GetArticleInfo();
+		$data['MaxSize'] = count($ArticleData);
+		$data['menuid'] = $id;
+		$this->load->view("admin/articlelist.php", $data);
+	}
+	
+	public function ArticleShow()
+	{
+		$ArticleData = $this->ArticleDB->GetArticleInfo();
+		$PageIndex = $_POST['pageIndex'];
+		$PageSize = $_POST['pageSize'];
+		
+		$PageStart = $PageIndex * $PageSize;
+		$PageEnd = ($PageIndex + 1) * $PageSize;
+		$MaxPageSize = count($ArticleData);
+		
+		if ($PageEnd > $MaxPageSize) {
+			$PageEnd = $MaxPageSize;
+		}
+		
+		$strResult = '<tbody>';
+		for ($i = $PageStart; $i < $PageEnd; $i++)
+		{
+			$strResult = $strResult.'<tr><td><label>
+					<input type="checkbox" name="ace_list" class="ace" />
+					<span class="lbl"/>
+					</label>
+					</td>';
+			
+			$strResult = $strResult.'<td>'.$ArticleData[$i]->title.'</td>';
+			$strResult = $strResult.'<td>'.$ArticleData[$i]->classtitle.'</td><td>
+					<div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+						<button class="btn btn-xs btn-info" onclick="location.href='."'/sunweb/index.php/admin/articleadd/".$ArticleData[$i]->id."'".'">
+							<i class="icon-plus bigger-120"></i>
+						</button>
+					    <button class="btn btn-xs btn-info" onclick="location.href='."'/sunweb/index.php/admin/articleupdate/".$ArticleData[$i]->id."'".'">
+					        <i class="icon-edit bigger-120"></i>
+					    </button>
+					    <button class="btn btn-xs btn-danger" onclick="DelArticleClass('.$ArticleData[$i]->id.' )">
+					        <i class="icon-trash bigger-120"></i>
+					    </button>
+					</div>
+				</td></tr>';
+		}
+		$strResult = $strResult . '</tbody>';
+		
+		echo $strResult;
+	}
+	
+	// 上传函数
 	public function upload()
 	{		
 		$upload = new Upload();

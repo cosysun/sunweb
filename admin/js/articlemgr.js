@@ -4,7 +4,6 @@ $("document").ready(function(){
 	});
 });
 
-
 function DelArticleClass(id)
 {
 	if(confirm("确定要删除？"))
@@ -24,18 +23,18 @@ function DelArticleClass(id)
 	}
 }
 
-function Editarticleclass(bFlag, id)
+function EditArticle(bFlag, id)
 {
-	var title = $('#articleclasstitle').val();
+	var title = $('#articletitle').val();
 	var rootid = $('#parentid').val();
 	var imgpath = $('#thumb').val();
-	var link = $('#articleclasslink').val();
-	var sort = $('#articleclasssort').val();	
+	var intro = $('#articleintro').val();
+	var content = $('.xheditor').val();	
 	
 	$.ajax({
 		type:"POST",
-		url:"/sunweb/index.php/admin/articleclassedit",
-		data:{'id':id, 'title':title, 'rootid':rootid, 'link':link, 'sort':sort, 'img':imgpath, 'flag':bFlag},
+		url:"/sunweb/index.php/admin/articleedit",
+		data:{'id':id, 'title':title, 'rootid':rootid, 'intro':intro, 'content':content, 'img':imgpath, 'flag':bFlag},
 		dataType:"text",
 		cache:false,
 		global:false,
@@ -48,7 +47,7 @@ function Editarticleclass(bFlag, id)
 				{
 					strMsg = "更新成功"
 					
-					setTimeout(function(){location.href = "/sunweb/index.php/admin/articleclassmgr/menu-articleclasslist";}, 1000);
+					setTimeout(function(){location.href = "/sunweb/index.php/admin/articlemgr/menu-articlelist";}, 1000);
 				}
 				else
 				{

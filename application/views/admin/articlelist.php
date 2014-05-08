@@ -45,22 +45,25 @@
 				</div><!-- /.page-header -->
 				
 				<!-- PAGE CONTENT BEGINS -->
-				<div class="row">
+				<div class="row-fluid">
 					<div class="col-xs-12">
 							<table id="sample-table-1" class="table table-striped table-bordered table-hover">
 								<thead>
 									<tr>
 										<th>
-											<label>
+												<label>
 												<input type="checkbox" class="ace" name="check_all" id="check_ace" />
-												<span class="lbl"/>
-											</label>
+													<span class="lbl"/>
+												</label>
 										</th>
+
 										<th>标题</th>
 										<th>分类</th>
 										<th>操作</th>
 									</tr>
 								</thead>
+								<tbody>
+								</tbody>
 							</table>
 							
 							<div class="row">
@@ -75,12 +78,8 @@
 									</div>
 								</div>
 								
-								<div class="col-sm-6">
-								   <div class="dataTables_paginate paging_bootstrap">
-									<div id="Pagination" class="right flickr"></div> 
-									</div>
-								</div>
 							</div>
+
 					</div><!-- /.col -->
 					
 											
@@ -99,39 +98,70 @@
 
 <script type="text/javascript"> 
 
-         var pageIndex = 0;     //页面索引初始值   
-         var pageSize = 10;     //每页显示条数初始化，修改显示条数，修改这里即可   
          $("document").ready(function () {
-              InitTable(0);    //Load事件，初始化表格数据，页面索引为0（第一页）
-                //分页，PageCount是总条目数，这是必选参数，其它参数都是可选
-                $("#Pagination").pagination(<?php echo $MaxSize; ?>, {
-                    callback: PageCallback,  //PageCallback() 为翻页调用次函数。
-                    prev_text: "« 上一页",
-                    next_text: "下一页 »",
-                    items_per_page:pageSize,
-                    num_edge_entries: 2,       //两侧首尾分页条目数
-                    num_display_entries: 6,    //连续分页主体部分分页条目数
-                    current_page: pageIndex,   //当前页索引
-                    link_to:"/sunweb/index.php/admin/articlelist/menu-articlelist"
-                });
-                //翻页调用   
-                function PageCallback(index, jq) {             
-                    InitTable(index);  
-                }  
-                //请求数据   
-                function InitTable(index) {                                  
-                    $.ajax({   
-                        type: "POST",  
-                        dataType: "text",  
-                        url: "/sunweb/index.php/admin/articleshow",      //提交到一般处理程序请求数据   
-                        data:{'pageIndex':index, 'pageSize':pageSize},          //提交两个参数：pageIndex(页面索引)，pageSize(显示条数)                   
-                        success: function(data) {
-                        	$('table tbody').remove();        //移除Id为Result的表格里的行，从第二行开始（这里根据页面布局不同页变）   
-                            $("#sample-table-1").append(data);             //将返回的数据追加到表格   
-                        }  
-                    }); 
-                }
+        	 	InitDataTable()
             }); 
+
+         function InitDataTable() {
+             $('#sample-table-1').dataTable({
+                 "sPaginationType": "full_numbers",
+                 "bPaginate": true,
+                 "bLengthChange": true,
+                 "bFilter": false,
+                 "bSort": false,
+                 "bInfo": false,
+                 "bAutoWidth": true,
+                 "bProcessing": true,
+                 "bServerSide": true,
+                 "bDestroy": true,
+                 "iDisplayLength": 5,
+                 "aLengthMenu": [[5,25, 50, 100], [5,25, 50, 100]],
+                 "oLanguage": {
+                     "sLengthMenu": "每页显示 _MENU_ 条记录",
+                     "sZeroRecords": "抱歉， 没有找到",
+                     "sInfo": "从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
+                     "sInfoEmpty": "没有数据",
+                     "sInfoFiltered": "(从 _MAX_ 条数据中检索)",
+                     "oPaginate": {
+                         "sFirst": "首页",
+                         "sPrevious": "前一页",
+                         "sNext": "后一页",
+                         "sLast": "尾页"
+                     }
+                 },
+                 "sAjaxSource": "/sunweb/index.php/admin/articleshow",
+				 
+				 // 这个是定义 列表的列名称，和显示位置（居中），返回数据的 key 要与这个名称相同，
+                 "aoColumns": [
+								{
+								"mData":null,
+								"mRender": function() {return "<input type='checkbox' name='ace_list' class='ace' /> <span class='lbl'/>";},
+								"sWidth":"5%",
+								"bSortable":false
+								},
+								{ "mData": "title", "sClass": "center", "sWidth": "50%"},
+								{ "mData": "class", "sClass": "center", "sWidth": "30%" },
+								{"mData":"id","mRender": function(data){ return '<div class="visible-md visible-lg hidden-sm hidden-xs btn-group"><button class="btn btn-xs btn-info" onclick="location.href='+
+					"'/sunweb/index.php/admin/articleadd/"+data+"'"+'"><i class="icon-plus bigger-120"></i></button><button class="btn btn-xs btn-info" onclick="location.href='+
+								"'/sunweb/index.php/admin/articleupdate/"+data+"'"+'"><i class="icon-edit bigger-120"></i></button><button class="btn btn-xs btn-danger" onclick="DelArticleClass('+ data +
+								' )"><i class="icon-trash bigger-120"></i></button></div>'}, 
+								"sWidth":"15%", "bSortable":false }
+                               ],
+                 "fnServerData": function (sSource, aoData, fnCallback) {
+                     $.ajax({
+                         "type": "POST",
+                         "url": sSource,
+                         "dataType": "json",
+                         "data": {
+                             "aoData": JSON.stringify(aoData)
+                         },
+                         success: function (resp) {
+                             fnCallback(resp);
+                         }
+                     });
+                 }
+             });
+         }
 </script>
 
 <?php include 'footer.php';?>

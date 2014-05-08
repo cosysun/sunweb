@@ -38,19 +38,20 @@ class ArticleDB extends CI_Model
 	
 	public function GetArticleInfo()
 	{
-		$ArticleInfo = array();
+		$ArticleClass = array();
 		$ArticleResult = array();
-		$SubArticleResult = array();
 		$strSql = "SELECT a.*, b.title as classtitle FROM zcn_articles a, zcn_articles_class b where a.classid = b.id";
 	
 		$ArticleQueryRs = $this->db->query($strSql);
 
 		foreach($ArticleQueryRs->result() as $ArticleRow)
 		{
+            $ArticleClass[$ArticleRow->classid] = $ArticleRow->classtitle;
+            
 			array_push($ArticleResult, $ArticleRow);
 		}
 	
-		return $ArticleResult;
+		return array($ArticleClass, $ArticleResult);
 	}
 	
 	public function QueryArticleClassInfo($id)

@@ -24,7 +24,7 @@
 						<i class="icon-home home-icon"></i>
 						<a href="/sunweb/index.php/admin">首页</a>
 					</li>
-					<li class="active">文章分类添加</li>
+					<li class="active">文章添加</li>
 				</ul><!-- .breadcrumb -->
 
 				<div class="nav-search" id="nav-search">
@@ -42,7 +42,7 @@
 				<!-- PAGE CONTENT BEGINS -->
 				<div class="widget-box transparent" id="recent-box">
 					<div class="widget-header"> 
-						<h4>文章分类添加</h4>
+						<h4>文章添加</h4>
 						<div class="widget-toolbar no-border">
 							<ul class="nav nav-tabs" id="recent-tab">
 							<li class="active"><a data-toggle="tab" href="#tab1">基本信息</a></li>
@@ -57,43 +57,31 @@
 									<div class="articleclassadd">
 									<?php 
 										echo validation_errors(); 
-										echo form_open('admin/articleclassedit');
+										echo form_open('admin/articleedit');
 										
 										
 										$bFlag = 0;
 										if (count($info)) {
-											$articleclassinfo = $info;
+											$articleinfo = $info;
 											$bFlag = 1;
 										}
 										else {
-											$articleclassinfo['id'] = 0;
+											$articleinfo['id'] = 0;
 										}
 										
 										
 									?>
 										<fieldset>
 										<label>标题</label>
-										<input type="text" class="medium-input" id="articleclasstitle" name="articleclasstitle" value="<?php if($bFlag == 1) echo $articleclassinfo['title']; ?>"></input>
+										<input type="text" class="medium-input" id="articletitle" name="articletitle" value="<?php if($bFlag == 1) echo $articleinfo['classtitle']; ?>"></input>
 					
 										<label>导航</label>
-										<select name="parentid" id="parentid" class="small-input" >
-											
-											<?php 	
-												$str = '<option value="0"';
-												if($bFlag == 1)
-												{
-													if ($articleclassinfo['rootid'] == 0) {
-														$str = $str. 'selected="selected"';
-													}
-												}
-												echo $str.'>作为一级分类</option>';
-											?>
-											
+										<select name="parentid" id="parentid" class="small-input" >			
 											<?php 
 												foreach ($articleclass as $key=>$value){
 													if($bFlag == 1)
 													{	
-														if ($key == $articleclassinfo['rootid']) {
+														if ($key == $articleinfo['classid']) {
 															echo '<option value='.$key.' selected="selected">┠'.$value.'</option>';
 															continue;
 														}
@@ -105,20 +93,19 @@
 										</select>
 										<label>缩略图</label>
 										<div id="uploadem">
-											<input class="text-input medium-input" type="text" id="thumb" name="thumb" value="<?php if($bFlag == 1) echo $articleclassinfo['thumb']; ?>" /> 
+											<input class="text-input medium-input" type="text" id="thumb" name="thumb" value="<?php if($bFlag == 1) echo $articleinfo['thumb']; ?>" /> 
 											<a class="btn_addPic" href="javascript:void(0);"><span><em>+</em>添加图片</span><input class="medium-input" type="file" id="thumb_file" name="thumb_file" onchange="return ajaxFileUpload('thumb_file','thumb','thumb_loading');" /></a>
 											<span id="thumb_loading"></span>
 										</div>
 										
-										<label>转链接</label>
-										<input type="text" class="medium-input" id="articleclasslink" name="articleclasslink" value="<?php if($bFlag == 1) echo $articleclassinfo['link']; ?>"></input>
+										<label>简介</label>
+										<input type="text" class="medium-input" id="articleintro" name="articleintro" value="<?php if($bFlag == 1) echo $articleinfo['intro']; ?>"></input>
 										
-										<label>排序</label>
-										<input type="text" class="medium-input" id="articleclasssort" name="articleclasssort" value="<?php if($bFlag == 1) echo $articleclassinfo['orders']; ?>"></input>
-										
-										<p>
+                                        <label>内容</label>
+                                        <textarea id="content" name="content" class="xheditor" rows="12" cols="80" style="width: 80%"></textarea>
+                                        <p>
 											<br/>
-											<input type="button" class="btn btn-info" name="Add" value="确定" onclick="Editarticleclass(<?php echo $bFlag; ?>,<?php echo $articleclassinfo['id'];?>)"></input>
+											<input type="button" class="btn btn-info" name="Add" value="确定" onclick="EditArticle(<?php echo $bFlag; ?>,<?php echo $articleinfo['id'];?>)"></input>
 										</p>
 										</fieldset>
 									</form>							
@@ -142,6 +129,9 @@
 	</div><!-- /.main-container-inner -->
 </div><!-- /.main-container -->
 
-<script src="admin/js/articleclassmgr.js"></script>
+<script type="text/javascript" src="admin/plugin/xheditor/xheditor-1.2.1.min.js"></script>
+<script type="text/javascript" src="admin/plugin/xheditor/xheditor_lang/zh-cn.js"></script>
+
+<script src="admin/js/articlemgr.js"></script>
 
 <?php include 'footer.php';?>

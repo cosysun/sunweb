@@ -1,6 +1,57 @@
 <?php
 require 'uploada.php';
 
+require_once('FirePHPCore/fb.php');
+require_once('FirePHPCore/FirePHP.class.php');
+
+
+/**************************************************************
+ *
+*	使用特定function对数组中所有元素做处理
+*	@param	string	&$array		要处理的字符串
+*	@param	string	$function	要执行的函数
+*	@return boolean	$apply_to_keys_also		是否也应用到key上
+*	@access public
+*
+*************************************************************/
+function arrayRecursive(&$array, $function, $apply_to_keys_also = false)
+{
+	static $recursive_counter = 0;
+	if (++$recursive_counter > 1000) {
+		die('possible deep recursion attack');
+	}
+	foreach ($array as $key => $value) {
+		if (is_array($value)) {
+			arrayRecursive($array[$key], $function, $apply_to_keys_also);
+		} else {
+			$array[$key] = $function($value);
+		}
+
+		if ($apply_to_keys_also && is_string($key)) {
+			$new_key = $function($key);
+			if ($new_key != $key) {
+				$array[$new_key] = $array[$key];
+				unset($array[$key]);
+			}
+		}
+	}
+	$recursive_counter--;
+}
+
+/**************************************************************
+ *
+*	将数组转换为JSON字符串（兼容中文）
+*	@param	array	$array		要转换的数组
+*	@return string		转换得到的json字符串
+*	@access public
+*
+*************************************************************/
+function JSON($array) {
+	arrayRecursive($array, 'urlencode', true);
+	$json = json_encode($array);
+	return urldecode($json);
+}
+
 class admin extends CI_Controller{
 	public function __construct()
 	{
@@ -15,6 +66,8 @@ class admin extends CI_Controller{
 	
 	public function index()
 	{
+		FB::log('log message');
+		
 		$MenuArray = $this->MenuDB->GetMenuInfo();
 		
 		$data['menu'] = $MenuArray;
@@ -135,50 +188,67 @@ class admin extends CI_Controller{
 		$ArticleData = $this->ArticleDB->GetArticleInfo();
 		$data['MaxSize'] = count($ArticleData);
 		$data['menuid'] = $id;
+		//$data['index'] = $index;
 		$this->load->view("admin/articlelist.php", $data);
 	}
 	
 	public function ArticleShow()
 	{
-		$ArticleData = $this->ArticleDB->GetArticleInfo();
-		$PageIndex = $_POST['pageIndex'];
-		$PageSize = $_POST['pageSize'];
+		$ArticleData = $this->ArticleDB->GetArticleInfo()[1];
+		$DataJson =json_decode($_POST['aoData']);
 		
-		$PageStart = $PageIndex * $PageSize;
-		$PageEnd = ($PageIndex + 1) * $PageSize;
+		$PageStart = $DataJson[3]->value;
+		$PageEnd = $DataJson[3]->value + $DataJson[4]->value;	// 这两个相加表示 最后显示位置
+		
 		$MaxPageSize = count($ArticleData);
 		
 		if ($PageEnd > $MaxPageSize) {
 			$PageEnd = $MaxPageSize;
 		}
 		
-		$strResult = '<tbody>';
+		$aaData = array();
 		for ($i = $PageStart; $i < $PageEnd; $i++)
 		{
-			$strResult = $strResult.'<tr><td><label>
-					<input type="checkbox" name="ace_list" class="ace" />
-					<span class="lbl"/>
-					</label>
-					</td>';
-			
-			$strResult = $strResult.'<td>'.$ArticleData[$i]->title.'</td>';
-			$strResult = $strResult.'<td>'.$ArticleData[$i]->classtitle.'</td><td>
-					<div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
-						<button class="btn btn-xs btn-info" onclick="location.href='."'/sunweb/index.php/admin/articleadd/".$ArticleData[$i]->id."'".'">
-							<i class="icon-plus bigger-120"></i>
-						</button>
-					    <button class="btn btn-xs btn-info" onclick="location.href='."'/sunweb/index.php/admin/articleupdate/".$ArticleData[$i]->id."'".'">
-					        <i class="icon-edit bigger-120"></i>
-					    </button>
-					    <button class="btn btn-xs btn-danger" onclick="DelArticleClass('.$ArticleData[$i]->id.' )">
-					        <i class="icon-trash bigger-120"></i>
-					    </button>
-					</div>
-				</td></tr>';
+			$DataTmp = array('title'=>$ArticleData[$i]->title, 'class'=>$ArticleData[$i]->classtitle, 'id'=>$ArticleData[$i]->id);	
+			array_push($aaData, $DataTmp);
 		}
-		$strResult = $strResult . '</tbody>';
+        
+        $DataRes = array('aaData'=>$aaData, 'iTotalDisplayRecords'=>$MaxPageSize, 'iTotalRecords'=>$MaxPageSize);
+		$ResJson = JSON($DataRes);
+        
+		//FB::log($DataRes);
 		
-		echo $strResult;
+		echo $ResJson;
+	}
+    
+    public function ArticleAdd($id)
+    {
+        $ArticleClassArray = $this->ArticleDB->GetArticleInfo();
+        
+        FB::log($ArticleClassArray);
+	
+		$data['articleclass'] = $ArticleClassArray[0];
+		$data['info'] = array();
+		$data['menuid'] = $id;
+        
+        $this->load->view("admin/articleadd.php", $data);
+    }
+    
+    public function ArticleEdit()
+	{
+		$articleArray = array();
+		$articleArray['title']= $_POST['title'];
+		$articleArray['rootid']= $_POST['rootid'];
+		$articleArray['thumb']= $_POST['img'];
+		$articleArray['intro']= $_POST['intro'];
+		$articleArray['content']= $_POST['content'];
+		$flag = $_POST['flag'];
+		$articleArray['id'] = $_POST['id'];
+        
+       // FB::log($articleArray);
+		//$this->ArticleDB->EditArticle($articleArray, $flag);
+	
+		echo TRUE;
 	}
 	
 	// 上传函数

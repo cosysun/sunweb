@@ -47,7 +47,8 @@
 		
 				<!--[if !IE]> -->
 
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+		<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
+        	<script src="admin/js/jquery-1.7.2.min.js"></script>
 
 		<!-- <![endif]-->
 
@@ -55,11 +56,11 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <![endif]-->
 
-		<!--[if !IE]> -->
+		<!--[if !IE]> 
 
-		<script type="text/javascript">
-			window.jQuery || document.write("<script src='admin/js/jquery-2.0.3.min.js'>"+"<"+"script>");
-		</script>
+		 <script type="text/javascript">
+			 window.jQuery || document.write("<script src='admin/js/jquery-1.7.2.min.js'>"+"<"+"script>");
+		 </script>-->
 
 		<!-- <![endif]-->
 
@@ -96,6 +97,10 @@
 		<script src="admin/js/ace.min.js"></script>
 		<script src="admin/plugin/upload/ajaxfileupload.js"></script>
 		<script src="admin/js/admin.jquery.configuration.js"></script>
+		
+		<link rel="stylesheet" href="admin/plugin/DataTables/media/css/jquery.dataTables.css" />
+		<script src="admin/plugin/DataTables/media/js/jquery.dataTables.min.js"></script>
+		<script src="admin/plugin/DataTables/media/js/dataTables.bootstrap.js"></script>
 		
 		
 	</head>

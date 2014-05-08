@@ -7,6 +7,10 @@
 
 .col-xs-12 {margin-top:10px;}
 
+div.row-fluid {
+margin-top: 10px;
+}
+
 .table-responsive {border:#cccccc 1px solid; font-size:13px; padding:20px;}
 
 .table-responsive .table-cs{border-style:none;}
